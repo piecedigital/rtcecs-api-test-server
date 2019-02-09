@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+// For sending logs and crash dumps to the server for storage
+
+import "tbrpc/tbrpc.proto";
+
+package tbmatch;
+
+message CrashReportRequest {
+	string app_name = 1;
+	string build_version = 2;
+	string machine_id = 3;			// Unique Windows identifier for the machine that crashed.
+	bytes bundle = 4;				// Zip of crash report contents
+}
+
+service CrashReportService {
+
+	rpc CrashReport (CrashReportRequest) returns (tbrpc.Empty) {
+		option (tbrpc.access) = ANON;
+	}
+}

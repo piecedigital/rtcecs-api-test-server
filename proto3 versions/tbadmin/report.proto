@@ -1,0 +1,93 @@
+syntax = "proto3";
+package tbadmin;
+
+import "tbrpc/tbrpc.proto";
+import "tbmatch/match.proto";
+
+message CrashBuildIdentifier {
+	string build_identifier = 1;
+	string app_name = 2;
+	string build_version = 3;
+}
+
+message CrashCollection {
+	string crash_identifier = 1;	// The top line of the stack trace, used as a unique identifier to group together the same types of crash.
+	string build_identifier = 2;
+	uint64 occurrences = 3;
+	uint64 users_affected = 4;		// The number of unique users affected by the crash. Less than num_occurrences if a crash happens to the same person more than once.
+	string stack_trace = 5;
+}
+
+message SymbolHeader {
+	string symbol_path = 1;		// The path on gcs
+	string app_name = 2;
+	string build_version = 3;
+	string symbol_directory = 4;	//The directory minidump_stackwalk will look for the symbol file in, retrieved from the first line of the sym file
+}
+
+message CrashReportHeader {
+	string report_path = 1;		// The path on gcs
+	int64 timestamp = 2;
+	string app_name = 3;
+	string build_version = 4;
+	string machine_id = 5;
+	string crash_number = 6;		// The crash number on a per-build version basis
+}
+
+message ListDesyncsRequest {
+	int32 offset = 1;
+	int32 limit = 2		;
+}
+message ListDesyncsResult {
+	repeated tbmatch.DesyncReportHeader desync = 1;
+}
+
+message ListCrashesRequest {
+	int32 offset = 1;
+	int32 limit = 2		;
+	string build_identifier = 3;
+	string crash_identifier = 4;
+}
+
+message ListCrashesResult {
+	CrashCollection collection = 1;
+	repeated CrashReportHeader reports = 2;
+}
+
+message ListCrashBuildIdentifiersRequest {
+	int32 offset = 1;
+	int32 limit = 2		;
+}
+
+message ListCrashBuildIdentifiersResult {
+	repeated CrashBuildIdentifier identifiers = 1;
+}
+
+message ListCrashCollectionsRequest {
+	int32 offset = 1;
+	int32 limit = 2		;
+	string build_identifier = 3;
+}
+
+message ListCrashCollectionsResult {
+	repeated CrashCollection collections = 1;
+}
+
+service FailReportService {
+
+	rpc ListDesyncs(ListDesyncsRequest) returns (ListDesyncsResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc ListCrashes(ListCrashesRequest) returns (ListCrashesResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc ListCrashBuildIdentifiers(ListCrashBuildIdentifiersRequest) returns (ListCrashBuildIdentifiersResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc ListCrashCollections(ListCrashCollectionsRequest) returns (ListCrashCollectionsResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+}

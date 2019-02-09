@@ -1,0 +1,199 @@
+syntax = "proto3";
+package tbadmin;
+
+import "tbrpc/tbrpc.proto";
+import "tbmatch/match.proto";
+import "tbmatch/lobby.proto";
+
+message QueueUser {
+	int64 account_id = 1;
+	string handle = 2;
+	string build_version = 3;
+
+	tbmatch.NetworkAddr network = 10;
+	tbmatch.CharacterSpec character = 11;
+
+	double wait_time = 20;
+	double rating = 21;
+	int64 last_opp_id = 23;
+	string last_opp_handle = 24;
+	string continent_code = 25;
+	double latitude = 26;
+	double longitude = 27;
+
+	int32 echelon = 30;
+	int32 tier = 31;
+	int32 points = 32;
+}
+
+message LobbySummary {
+	tbmatch.Lobby lobby = 1;
+
+	string build_version = 10;
+	int32 members = 11;
+
+	int64 create_time_unix 		= 31;
+	int64 last_active_time_unix 	= 32;
+
+	double __deprecated_age = 21;
+	double __deprecated_idle = 22;
+}
+
+message ActiveMatch {
+	int64 match_id = 1;
+	tbmatch.GameDescriptor desc = 2;
+	int64 start_time_unix = 3;
+}
+
+message RecentMatch {
+	int64 match_id = 1;
+	int64 start_time_unix = 2;
+	double duration_sec = 3;
+	bool rated = 4;
+	string build_version = 5;
+	string log = 6;
+	bool abandoned = 7;
+
+	message Player {
+		int64 account_id = 1;
+		string handle = 2;
+		string game_char = 3;
+		bool winner = 4;
+		bool disconnect = 5;
+	}
+	repeated Player player = 10;
+
+	message Game {
+		tbmatch.GameConfig game = 1;
+		int32 win_slot = 2;
+		int64 start_time_unix = 3;
+		double duration_sec = 4;
+	}
+	repeated Game game = 20;
+}
+
+message MatchPlayer {
+	int64 account_id = 1;
+	string handle = 2;
+	int64 create_time_unix = 3;
+	int64 modify_time_unix = 4;
+
+	message ServerStats {
+		int32 attempts = 1;
+		int32 complete = 2;
+		int32 disconnects = 3;
+	}
+	ServerStats server_stats = 10;
+
+	tbmatch.PlayerStats player_stats = 11;
+
+	message Rating {
+		tbmatch.MatchType type = 1;
+		double rating = 2;
+		double deviation = 3;
+		double volatility = 4;
+
+		double session_rating = 5;
+
+		int64 last_rating_time_unix = 10;
+	}
+	repeated Rating rating = 20;
+}
+
+message GetMatchQueueUsersRequest {
+	tbmatch.MatchType queue = 1;
+}
+
+message GetMatchQueueUsersResult {
+	repeated QueueUser user = 1;
+}
+
+message GetLobbiesRequest {
+	int32 limit = 2		;
+}
+message GetLobbiesResult {
+	repeated LobbySummary lobby = 1;
+}
+message GetLobbyRequest {
+	int64 lobby_id = 1;
+}
+message GetLobbyResult {
+	LobbySummary lobby = 1;
+}
+
+message GetActiveMatchesRequest {
+	tbmatch.MatchType match_type = 1;
+	int32 limit = 2		;
+}
+message GetActiveMatchesResult {
+	repeated ActiveMatch match = 1;
+}
+
+message GetActiveMatchRequest {
+	tbmatch.MatchType match_type = 1;
+	int64 match_id = 2;
+}
+message GetActiveMatchResult {
+	ActiveMatch match = 1;
+}
+
+message GetRecentMatchesRequest {
+	tbmatch.MatchType match_type = 1;
+	int32 limit = 2		;
+
+	// Limit results to those with the given player involved.
+	int64 player_account_id = 3;
+}
+message GetRecentMatchesResult {
+	repeated RecentMatch match = 1;
+}
+
+message GetMatchDetailRequest {
+	int64 match_id = 1;
+}
+message GetMatchDetailResult {
+	RecentMatch match = 1;
+}
+
+message GetPlayerDetailRequest {
+	int64 account_id = 1;
+}
+message GetPlayerDetailResult {
+	MatchPlayer player = 1;
+}
+
+
+service MatchAdminService {
+	rpc GetMatchQueueUsers(GetMatchQueueUsersRequest) returns (GetMatchQueueUsersResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc GetLobbies(GetLobbiesRequest) returns (GetLobbiesResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc GetLobby(GetLobbyRequest) returns (GetLobbyResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc GetActiveMatches(GetActiveMatchesRequest) returns (GetActiveMatchesResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc GetActiveMatch(GetActiveMatchRequest) returns (GetActiveMatchResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc GetRecentMatches(GetRecentMatchesRequest) returns (GetRecentMatchesResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc GetMatchDetail(GetMatchDetailRequest) returns (GetMatchDetailResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc GetPlayerDetail(GetPlayerDetailRequest) returns (GetPlayerDetailResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+}
+

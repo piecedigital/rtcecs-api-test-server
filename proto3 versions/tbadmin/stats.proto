@@ -1,0 +1,135 @@
+syntax = "proto3";
+// Various pre-packaged stats queries.
+
+package tbadmin;
+
+import "tbrpc/tbrpc.proto";
+import "tbmatch/match.proto";
+
+message UserCountStats {
+	int64 total = 1;
+	int64 no_access = 2;
+
+	message RoleCount {
+		tbrpc.Access role = 1;
+		int64 count = 2;
+	}
+	repeated RoleCount role = 3;
+}
+
+message Session {
+	int64 account_id = 1;
+	string handle = 2;
+	string email = 3;
+	string build_version = 4;
+	int64 start_time_unix = 5;
+	int64 last_active_time_unix = 6;
+	string remote_ip = 7;
+	int32 type = 8;
+}
+
+message CharacterReportOptions {
+	int64 start_time_unix = 1;			// Time of first match to include, 0 = all
+	int64 end_time_unix = 2;			// Time of last match to include, 0 = now
+
+	// Global filter options.
+	string build_version = 4;			// Limit results to a specific build.
+	tbmatch.MatchType match_type = 5;	// Limit results to a specific match type.
+	bool include_disconnect = 6;		// Include disconnected matches.
+	bool include_disagree = 7;			// Include foul-play matches.
+
+	// Win ratio options.
+	int32 max_rating_diff = 10		;	// Most allowed rating difference for a win ratio query.
+	int32 rating_bucket_size = 11	;	// Width of Glicko2 rating buckets.
+}
+
+message Matchup {
+	// Char type vs. opponent type.
+	string char_type = 1;
+	string versus_type = 2;
+
+	uint32 wins = 20;
+	uint32 total = 21;
+}
+
+message RatingWinRatioReport {
+	// Max Glicko2 rating for these matchups.
+	int32 rating_cap = 1;
+
+	repeated Matchup matchup = 2;
+}
+
+
+// Overall stats for an individual character.
+message CharacterUsage {
+	string type_name = 1;
+
+	uint32 total_matches = 2;			// Number of match slots involved in.
+	uint32 unique_users = 3;			// Number of unique users who played the character.
+	uint32 wins = 4;
+	uint32 disconnects = 5;
+
+	message VariantUsage {
+		string specials = 1;
+		uint32 count = 2;
+	}
+	repeated VariantUsage variant_top_n = 6;
+}
+
+message CharacterUsageReport {
+	// Time this report was generated.
+	int64 report_time = 1;
+
+	// Query parameters that bounded the report scope.
+	CharacterReportOptions options = 2;
+
+	// Matches observed in this report.
+	uint32 total_matches = 10;
+
+	// Total unique users considered for the report.
+	uint32 total_users = 11;
+
+	// Summary stats for each character.
+	repeated CharacterUsage char_usage = 13;
+
+	// Half-matrix of win/loss ratios for each character combo & rating band.
+	repeated RatingWinRatioReport win_ratio = 14;
+}
+
+// ------------------------------ RPC Service Messages -------------------------------
+
+message GetSessionsRequest {
+	int32 max_age_sec = 1		;
+	int32 limit = 2			;
+}
+
+message GetSessionsResult {
+	repeated Session game = 1;
+	repeated Session launcher = 2;
+	repeated Session web = 3;
+
+	// Total sessions active.
+	int32 total = 10;
+}
+
+message GetCharacterUsageRequest {
+	CharacterReportOptions options = 1;
+}
+
+message GetCharacterUsageResult {
+	CharacterUsageReport report = 1;
+}
+
+service StatsService {
+	rpc CountUsers(tbrpc.Empty) returns (UserCountStats) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc GetSessions(GetSessionsRequest) returns (GetSessionsResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+
+	rpc GetCharacterUsage(GetCharacterUsageRequest) returns (GetCharacterUsageResult) {
+		option (tbrpc.access) = STATS_READ;
+	}
+}

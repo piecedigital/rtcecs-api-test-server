@@ -1,0 +1,27 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.list-of-test-routes {
+    padding: 8px;
+
+    .route-container {
+        padding: 8px;
+        border-radius: 5px;
+        background-color: rgba(200, 200, 200, 1);
+
+        &:not(:last-child) {
+            margin-bottom: 8px;
+        }
+
+        .route-info {
+            .route-info-url {}
+        }
+        .route-actions {}
+    }
+}

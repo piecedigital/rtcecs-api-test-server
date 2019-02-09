@@ -1,0 +1,11 @@
+{
+  "name": "",
+  "version": "",
+  "devDependencies": {
+    "@types/node": "^10.12.24",
+    "@types/node-fetch": "^2.1.6"
+  },
+  "dependencies": {
+    "node-fetch": "^2.3.0"
+  }
+}
