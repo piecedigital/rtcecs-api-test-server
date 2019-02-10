@@ -6,12 +6,26 @@ body {
   font-family: Arial, Helvetica, sans-serif; }
 
 .list-of-test-routes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   padding: 8px; }
   .list-of-test-routes .route-container {
-    padding: 8px;
-    border-radius: 5px;
-    background-color: #c8c8c8; }
+    width: calc(100% / 3); }
     .list-of-test-routes .route-container:not(:last-child) {
       margin-bottom: 8px; }
+    .list-of-test-routes .route-container:not(:nth-child(3n)) {
+      padding-right: 8px; }
+    .list-of-test-routes .route-container .padder {
+      padding: 8px;
+      border-radius: 5px;
+      background-color: #c8c8c8; }
+
+@media (max-width: 900px) {
+  .list-of-test-routes .route-container {
+    width: calc(100% / 2); } }
+@media (max-width: 500px) {
+  .list-of-test-routes .route-container {
+    width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */

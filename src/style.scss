@@ -8,20 +8,63 @@ body {
 }
 
 .list-of-test-routes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     padding: 8px;
 
     .route-container {
-        padding: 8px;
-        border-radius: 5px;
-        background-color: rgba(200, 200, 200, 1);
+        width: calc(100% / 3);
 
         &:not(:last-child) {
             margin-bottom: 8px;
+        }
+
+        &:not(:nth-child(3n)) {
+            padding-right: 8px;
+        }
+
+        .padder {
+            padding: 8px;
+            border-radius: 5px;
+            background-color: rgba(200, 200, 200, 1);
         }
 
         .route-info {
             .route-info-url {}
         }
         .route-actions {}
+    }
+}
+
+@media (max-width: 900px) {
+    .list-of-test-routes {
+        .route-container {
+            width: calc(100% / 2);
+
+            &:not(:last-child) {}
+
+            .route-info {
+                .route-info-url {}
+            }
+
+            .route-actions {}
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .list-of-test-routes {
+        .route-container {
+            width: 100%;
+
+            &:not(:last-child) {}
+
+            .route-info {
+                .route-info-url {}
+            }
+
+            .route-actions {}
+        }
     }
 }
