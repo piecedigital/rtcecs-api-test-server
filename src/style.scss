@@ -32,6 +32,13 @@ body {
 
         .route-info {
             .route-info-url {}
+            .route-info-code {
+                padding: 8px;
+                max-width: 100%;
+                background-color: rgba(50, 50, 50, 1);
+                color: white;
+                overflow-x: auto;
+            }
         }
         .route-actions {}
     }

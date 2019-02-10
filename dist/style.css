@@ -20,6 +20,12 @@ body {
       padding: 8px;
       border-radius: 5px;
       background-color: #c8c8c8; }
+    .list-of-test-routes .route-container .route-info .route-info-code {
+      padding: 8px;
+      max-width: 100%;
+      background-color: #323232;
+      color: white;
+      overflow-x: auto; }
 
 @media (max-width: 900px) {
   .list-of-test-routes .route-container {

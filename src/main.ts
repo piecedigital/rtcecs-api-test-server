@@ -29,6 +29,11 @@ function generateHTML(route: RouteListItem) {
                 url.className = "route-info-url";
                 url.innerText = `URL: ${route.url}`;
                 info.appendChild(url);
+
+                const code = document.createElement("pre");
+                code.className = "route-info-code";
+                code.innerText = `${JSON.stringify(route.data)}`;
+                info.appendChild(code);
             } while (false);
 
             const actions = document.createElement("div");
@@ -42,7 +47,7 @@ function generateHTML(route: RouteListItem) {
                 const executeRoute = document.createElement("button");
                 executeRoute.innerText = "Run Route";
                 executeRoute.addEventListener("click", () => {
-                    request(route.url, route.func);
+                    request(route);
                 });
                 actions.appendChild(executeRoute);
             } while (false);

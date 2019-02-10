@@ -25,6 +25,10 @@ function generateHTML(route) {
                 url.className = "route-info-url";
                 url.innerText = "URL: " + route.url;
                 info.appendChild(url);
+                var code = document.createElement("pre");
+                code.className = "route-info-code";
+                code.innerText = "" + JSON.stringify(route.data);
+                info.appendChild(code);
             } while (false);
             var actions = document.createElement("div");
             actions.className = "route-actions";
@@ -36,7 +40,7 @@ function generateHTML(route) {
                 var executeRoute = document.createElement("button");
                 executeRoute.innerText = "Run Route";
                 executeRoute.addEventListener("click", function () {
-                    routes_1.request(route.url, route.func);
+                    routes_1.request(route);
                 });
                 actions.appendChild(executeRoute);
             } while (false);
