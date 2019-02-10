@@ -39,6 +39,8 @@ function generateHTML(route: RouteListItem) {
 
                 const code = document.createElement("pre");
                 code.className = "route-info-code";
+                console.log(route.data);
+
                 code.innerText = `${JSON.stringify(route.data)}`;
                 info.appendChild(code);
             } while (false);

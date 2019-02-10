@@ -649,6 +649,7 @@ function generateHTML(route) {
                 info.appendChild(url);
                 var code = document.createElement("pre");
                 code.className = "route-info-code";
+                console.log(route.data);
                 code.innerText = "" + JSON.stringify(route.data);
                 info.appendChild(code);
             } while (false);
@@ -1437,7 +1438,7 @@ function onProtosLoad() {
             login: "1",
             password: "2",
             // Client build.  May require certain version to login.
-            build_version: "5",
+            buildVersion: "5",
         }), handlers.LoginHandler),
     ];
 }
