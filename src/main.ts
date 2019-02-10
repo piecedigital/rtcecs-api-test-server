@@ -1,7 +1,14 @@
-import { RouteListItem, request, listOfRoutes } from "./routes";
+import InitRoutes, { RouteListItem, request, listOfRoutes } from "./routes";
+import * as pb from "./pb-handlers";
 
-run();
+export const protos = new pb.Protos();
+
+protos.onProtosLoad = () => {
+    run();
+}
+
 function run() {
+    InitRoutes(protos);
     populateTestRoutesUI();
 }
 

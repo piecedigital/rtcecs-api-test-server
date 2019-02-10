@@ -1,8 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var routes_1 = require("./routes");
-run();
+var pb = require("./pb-handlers");
+exports.protos = new pb.Protos();
+exports.protos.onProtosLoad = function () {
+    run();
+};
 function run() {
+    routes_1.default(exports.protos);
     populateTestRoutesUI();
 }
 function populateTestRoutesUI() {

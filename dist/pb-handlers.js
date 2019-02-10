@@ -3,6 +3,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var pb = require("protobufjs");
 // import * as uuid from "uuid/v1";
 var Protos = /** @class */ (function () {
+    // {
+    //     Status: pb.Type,
+    //     // enum Status {
+    //     //     S_SUCCESS = 0;
+    //     //     S_ERROR = 1;
+    //     //     S_SERVER_ERROR = 2;
+    //     //     S_TIMEOUT = 3;
+    //     //     S_TRANSPORT_ERROR = 4;
+    //     //     S_UNKNOWN = 128;
+    //     // }
+    //     GameType: pb.Type,
+    //     // enum GameType {
+    //     //     GT_RISING_THUNDER = 100;
+    //     // }
+    // };
     function Protos() {
         var _this = this;
         var root = new pb.Root({
@@ -15,52 +30,55 @@ var Protos = /** @class */ (function () {
         };
         // console.log(root.resolvePath);
         pb.load([
-            "tbrpc/tbrpc.proto",
-            "tbmatch/match.proto",
             "tbui/tbcharacter.proto",
+            "tbmatch/event.proto",
+            "tbmatch/match.proto",
+            "tbportal/portal.proto",
+            "tbrpc/tbrpc.proto",
+            "tbmatch/session.proto",
         ], root)
             .then(function (root) { return root.resolveAll(); })
             .then(function (root) {
             _this.messages = {
-                WaitMatchProgressEvent: root.lookup(["tbmatch", "WaitMatchProgressEvent"]),
-                Result: root.lookup(["tbrpc", "Result"]),
-                PingTestResult: root.lookup(["tbrpc", "PingTestResult"]),
-                GameEndpointConfig: root.lookup(["tbrpc", "GameEndpointConfig"]),
-                NetworkAddr: root.lookup(["tbrpc", "NetworkAddr"]),
-                LoginRequest: root.lookup(["tbmatch", "LoginRequest"]),
-                GetGameSessionTicketRequest: root.lookup(["tbrpc", "GetGameSessionTicketRequest"]),
-                GetGameSessionTicketResult: root.lookup(["tbrpc", "GetGameSessionTicketResult"]),
-                RedeemGameSessionTicketRequest: root.lookup(["tbrpc", "RedeemGameSessionTicketRequest"]),
-                GetMatchRequest: root.lookup(["tbmatch", "GetMatchRequest"]),
-                CreateLobbyRequest: root.lookup(["tbmatch", "CreateLobbyRequest"]),
-                GetLobbyJoinCodeRequest: root.lookup(["tbmatch", "GetLobbyJoinCodeRequest"]),
-                GetEventResult: root.lookup(["tbmatch", "GetEventResult"]),
-                Event: root.lookup(["tbmatch", "Event"]),
-                GetEventRequest: root.lookup(["tbmatch", "GetEventRequest"]),
-                PingTestCompleteEvent: root.lookup(["tbmatch", "PingTestCompleteEvent"]),
-                GameProfile: root.lookup(["tbmatch", "GameProfile"]),
-                PlayerStats: root.lookup(["tbmatch", "PlayerStats"]),
-                CharacterStats: root.lookup(["tbmatch", "CharacterStats"]),
-                PlayerPreferences: root.lookup(["tbmatch", "PlayerPreferences"]),
-                ClientFeatureSet: root.lookup(["tbmatch", "ClientFeatureSet"]),
-                FeatureValue: root.lookup(["tbmatch", "FeatureValue"]),
-                MatchCreatedEvent: root.lookup(["tbmatch", "MatchCreatedEvent"]),
-                GameConfig: root.lookup(["tbmatch", "GameConfig"]),
-                Player: root.lookup(["tbmatch", "GameConfiglookup", "Player"]),
-                GameOptions: root.lookup(["tbmatch", "GameOptions"]),
-                CharacterSpec: root.lookup(["tbmatch", "CharacterSpec"]),
-                VariantSpec: root.lookup(["tbmatch", "VariantSpec"]),
-                LocMsg: root.lookup(["tbmatch", "LocMsg"]),
-                MsgParam: root.lookup(["tbmatch", "MsgParam"]),
-                MsgParamStr: root.lookup(["tbmatch", "MsgParamlookup", "Str"]),
-                GameSessionRequest: root.lookup(["tbmatch", "GameSessionRequest"]),
-                ClientSpec: root.lookup(["tbmatch", "ClientSpec"]),
+                WaitMatchProgressEvent: root.lookupType(["tbmatch", "WaitMatchProgressEvent"]),
+                Result: root.lookupType(["tbrpc", "Result"]),
+                PingTestResult: root.lookupType(["tbmatch", "PingTestResult"]),
+                GameEndpointConfig: root.lookupType(["tbmatch", "GameEndpointConfig"]),
+                NetworkAddr: root.lookupType(["tbmatch", "NetworkAddr"]),
+                LoginRequest: root.lookupType(["tbmatch", "LoginRequest"]),
+                GetGameSessionTicketRequest: root.lookupType(["tbmatch", "GetGameSessionTicketRequest"]),
+                GetGameSessionTicketResult: root.lookupType(["tbmatch", "GetGameSessionTicketResult"]),
+                RedeemGameSessionTicketRequest: root.lookupType(["tbmatch", "RedeemGameSessionTicketRequest"]),
+                GetMatchRequest: root.lookupType(["tbmatch", "GetMatchRequest"]),
+                CreateLobbyRequest: root.lookupType(["tbmatch", "CreateLobbyRequest"]),
+                GetLobbyJoinCodeRequest: root.lookupType(["tbmatch", "GetLobbyJoinCodeRequest"]),
+                GetEventResult: root.lookupType(["tbmatch", "GetEventResult"]),
+                Event: root.lookupType(["tbmatch", "Event"]),
+                GetEventRequest: root.lookupType(["tbmatch", "GetEventRequest"]),
+                PingTestCompleteEvent: root.lookupType(["tbmatch", "PingTestCompleteEvent"]),
+                GameProfile: root.lookupType(["tbmatch", "GameProfile"]),
+                PlayerStats: root.lookupType(["tbmatch", "PlayerStats"]),
+                CharacterStats: root.lookupType(["tbmatch", "CharacterStats"]),
+                PlayerPreferences: root.lookupType(["tbmatch", "PlayerPreferences"]),
+                ClientFeatureSet: root.lookupType(["tbmatch", "ClientFeatureSet"]),
+                FeatureValue: root.lookupType(["tbmatch", "FeatureValue"]),
+                MatchCreatedEvent: root.lookupType(["tbmatch", "MatchCreatedEvent"]),
+                GameConfig: root.lookupType(["tbmatch", "GameConfig"]),
+                Player: root.lookupType(["tbmatch", "GameConfig", "Player"]),
+                GameOptions: root.lookupType(["tbmatch", "GameOptions"]),
+                CharacterSpec: root.lookupType(["tbmatch", "CharacterSpec"]),
+                VariantSpec: root.lookupType(["tbmatch", "VariantSpec"]),
+                LocMsg: root.lookupType(["tbrpc", "LocMsg"]),
+                MsgParam: root.lookupType(["tbrpc", "MsgParam"]),
+                MsgParamStr: root.lookupType(["tbrpc", "MsgParam", "Str"]),
+                GameSessionRequest: root.lookupType(["tbportal", "GameSessionRequest"]),
+                ClientSpec: root.lookupType(["tbportal", "ClientSpec"]),
             };
             _this.enums = {
-                Status: root.lookup(["tbrpc", "Status"]),
-                GameType: root.lookup(["tbmatch", "GameType"]),
+                Status: root.lookupEnum(["tbrpc", "Status"]),
+                GameType: root.lookupEnum(["tbmatch", "GameType"]),
             };
-            console.log(_this.messages);
+            _this.onProtosLoad();
         })
             .catch(function (e) { return console.error("Problem loading protos: " + e); });
     }
