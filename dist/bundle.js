@@ -1,6 +1,8 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var pb = require("protobufjs");
+var protos = null;
 function LookupUserHandler(res) {
     console.log("LookupUserHandler");
     return "LookupUserHandler";
@@ -518,6 +520,15 @@ function GetRecentGamesHandler(res) {
 exports.GetRecentGamesHandler = GetRecentGamesHandler;
 ;
 function LoginHandler(res) {
+    res.json()
+        .then(function (data) {
+        console.log(data);
+        var r = new pb.Reader(data);
+        console.log(r);
+        var x = protos.messages.Result.decode(r);
+        console.log(x);
+    })
+        .catch(function (e) { return console.error(e); });
     console.log("LoginHandler");
     return "LoginHandler";
 }
@@ -613,8 +624,12 @@ function GetUsersInRankedCountHandler(res) {
 }
 exports.GetUsersInRankedCountHandler = GetUsersInRankedCountHandler;
 ;
+function InitHandlers(p) {
+    protos = p;
+}
+exports.default = InitHandlers;
 
-},{}],2:[function(require,module,exports){
+},{"protobufjs":16}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var routes_1 = require("./routes");
@@ -765,13 +780,14 @@ exports.Protos = Protos;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var node_fetch_1 = require("node-fetch");
-var handlers = require("./handlers");
+var handlers_1 = require("./handlers"), handlers = handlers_1;
 var protos = null;
-function getProtos(p) {
+function InitRoutes(p) {
     protos = p;
     onProtosLoad();
+    handlers_1.default(p);
 }
-exports.default = getProtos;
+exports.default = InitRoutes;
 var RouteListItem = /** @class */ (function () {
     function RouteListItem(url, data, handler) {
         this.url = url;
@@ -882,7 +898,8 @@ function onProtosLoad() {
 exports.onProtosLoad = onProtosLoad;
 function request(route) {
     console.log(route.data);
-    var final = createResultPayload(route.data.$type.encode(route.data).finish());
+    // const final = createResultPayload(route.data.$type.encode(route.data).finish());
+    var final = route.data.$type.encode(route.data).finish();
     node_fetch_1.default("https://localhost:" + (getPort() || 8000) + route.url, {
         "method": "POST",
         "body": JSON.stringify(Array.from(final))

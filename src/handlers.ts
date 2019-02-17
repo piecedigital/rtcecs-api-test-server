@@ -1,4 +1,7 @@
-import { Response } from "node-fetch";
+import * as pb from 'protobufjs';
+import { Protos } from "./pb-handlers";
+
+let protos: Protos = null;
 
 export function LookupUserHandler(res: Response) {
     console.log("LookupUserHandler");
@@ -345,6 +348,16 @@ export function GetRecentGamesHandler(res: Response) {
     return "GetRecentGamesHandler";
 };
 export function LoginHandler(res: Response) {
+    res.json()
+    .then(data => {
+        console.log(data);
+        var r = new pb.Reader(data);
+        console.log(r);
+        var x = protos.messages.Result.decode(r);
+        console.log(x);
+    })
+    .catch(e => console.error(e));
+
     console.log("LoginHandler");
     return "LoginHandler";
 };
@@ -408,3 +421,7 @@ export function GetUsersInRankedCountHandler(res: Response) {
     console.log("GetUsersInRankedCountHandler");
     return "GetUsersInRankedCountHandler";
 };
+
+export default function InitHandlers(p: Protos) {
+    protos = p;
+}

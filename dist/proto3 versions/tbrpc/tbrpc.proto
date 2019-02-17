@@ -133,7 +133,7 @@ message LocMsg {
 
 message Result {
 	// Result code of the invocation
-	// Status result = 1;
+	Status result = 1;
 
 	// result message, usually set when result != S_SUCCESS.
 	LocMsg msg = 4;

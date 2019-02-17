@@ -1,13 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var node_fetch_1 = require("node-fetch");
-var handlers = require("./handlers");
+var handlers_1 = require("./handlers"), handlers = handlers_1;
 var protos = null;
-function getProtos(p) {
+function InitRoutes(p) {
     protos = p;
     onProtosLoad();
+    handlers_1.default(p);
 }
-exports.default = getProtos;
+exports.default = InitRoutes;
 var RouteListItem = /** @class */ (function () {
     function RouteListItem(url, data, handler) {
         this.url = url;
@@ -118,7 +119,8 @@ function onProtosLoad() {
 exports.onProtosLoad = onProtosLoad;
 function request(route) {
     console.log(route.data);
-    var final = createResultPayload(route.data.$type.encode(route.data).finish());
+    // const final = createResultPayload(route.data.$type.encode(route.data).finish());
+    var final = route.data.$type.encode(route.data).finish();
     node_fetch_1.default("https://localhost:" + (getPort() || 8000) + route.url, {
         "method": "POST",
         "body": JSON.stringify(Array.from(final))

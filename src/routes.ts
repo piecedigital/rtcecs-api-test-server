@@ -1,13 +1,14 @@
 import fetch, { Response } from "node-fetch";
-import * as handlers from "./handlers";
+import InitHandlers, * as handlers from "./handlers";
 import { Message } from "protobufjs";
 import { Protos } from "./pb-handlers";
 
 let protos: Protos = null;
 
-export default function getProtos(p: Protos) {
+export default function InitRoutes(p: Protos) {
     protos = p;
     onProtosLoad();
+    InitHandlers(p);
 }
 
 export class RouteListItem {
@@ -140,7 +141,8 @@ export function onProtosLoad() {
 export function request(route: RouteListItem) {
     console.log(route.data);
 
-    const final = createResultPayload(route.data.$type.encode(route.data).finish());
+    // const final = createResultPayload(route.data.$type.encode(route.data).finish());
+    const final = route.data.$type.encode(route.data).finish();
 
     fetch(`https://localhost:${getPort() || 8000}${route.url}`, {
         "method": "POST",

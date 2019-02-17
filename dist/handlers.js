@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var pb = require("protobufjs");
+var protos = null;
 function LookupUserHandler(res) {
     console.log("LookupUserHandler");
     return "LookupUserHandler";
@@ -517,6 +519,15 @@ function GetRecentGamesHandler(res) {
 exports.GetRecentGamesHandler = GetRecentGamesHandler;
 ;
 function LoginHandler(res) {
+    res.json()
+        .then(function (data) {
+        console.log(data);
+        var r = new pb.Reader(data);
+        console.log(r);
+        var x = protos.messages.Result.decode(r);
+        console.log(x);
+    })
+        .catch(function (e) { return console.error(e); });
     console.log("LoginHandler");
     return "LoginHandler";
 }
@@ -612,3 +623,7 @@ function GetUsersInRankedCountHandler(res) {
 }
 exports.GetUsersInRankedCountHandler = GetUsersInRankedCountHandler;
 ;
+function InitHandlers(p) {
+    protos = p;
+}
+exports.default = InitHandlers;
