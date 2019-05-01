@@ -103,7 +103,7 @@ export function onProtosLoad() {
         // new RouteListItem('/ryzthn/rpc/LobbyBanUser', protos.messages.LobbyBanUser.create({}), handlers.LobbyBanUserHandler),
         // new RouteListItem('/ryzthn/rpc/LobbyRemoveUser', protos.messages.LobbyRemoveUser.create({}), handlers.LobbyRemoveUserHandler),
         // new RouteListItem('/ryzthn/rpc/GetGameProfile', protos.messages.GetGameProfile.create({}), handlers.GetGameProfileHandler),
-        new RouteListItem('/ryzthn/rpc/PingTest', protos.messages.PingTest.create({}), handlers.PingTestHandler),
+        // new RouteListItem('/ryzthn/rpc/PingTest', protos.messages.PingTest.create({}), handlers.PingTestHandler),
         // new RouteListItem('/ryzthn/rpc/GetMatch', protos.messages.GetMatch.create({}), handlers.GetMatchHandler),
         // new RouteListItem('/ryzthn/rpc/ResumeGetMatch', protos.messages.ResumeGetMatch.create({}), handlers.ResumeGetMatchHandler),
         // new RouteListItem('/ryzthn/rpc/CancelGetMatch', protos.messages.CancelGetMatch.create({}), handlers.CancelGetMatchHandler),
