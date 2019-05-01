@@ -40,6 +40,7 @@ var Protos = /** @class */ (function () {
             .then(function (root) { return root.resolveAll(); })
             .then(function (root) {
             _this.messages = {
+                Empty: root.lookupType(["tbrpc", "Empty"]),
                 WaitMatchProgressEvent: root.lookupType(["tbmatch", "WaitMatchProgressEvent"]),
                 Result: root.lookupType(["tbrpc", "Result"]),
                 PingTestResult: root.lookupType(["tbmatch", "PingTestResult"]),
