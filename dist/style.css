@@ -1,37 +1,48 @@
 *, *:before, *:after {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif; }
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .list-of-test-routes {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 8px; }
-  .list-of-test-routes .route-container {
-    width: calc(100% / 3); }
-    .list-of-test-routes .route-container:not(:last-child) {
-      margin-bottom: 8px; }
-    .list-of-test-routes .route-container:not(:nth-child(3n)) {
-      padding-right: 8px; }
-    .list-of-test-routes .route-container .padder {
-      padding: 8px;
-      border-radius: 5px;
-      background-color: #c8c8c8; }
-    .list-of-test-routes .route-container .route-info .route-info-code {
-      padding: 8px;
-      max-width: 100%;
-      background-color: #323232;
-      color: white;
-      overflow-x: auto; }
-
+  padding: 8px;
+}
+.list-of-test-routes .route-container {
+  width: calc(100% / 3);
+}
+.list-of-test-routes .route-container:not(:last-child) {
+  margin-bottom: 8px;
+}
+.list-of-test-routes .route-container:not(:nth-child(3n)) {
+  padding-right: 8px;
+}
+.list-of-test-routes .route-container .padder {
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #c8c8c8;
+}
+.list-of-test-routes .route-container .route-info .route-info-code {
+  padding: 8px;
+  max-width: 100%;
+  background-color: #323232;
+  color: white;
+  overflow-x: auto;
+}
 @media (max-width: 900px) {
   .list-of-test-routes .route-container {
-    width: calc(100% / 2); } }
+    width: calc(100% / 2);
+  }
+}
 @media (max-width: 500px) {
   .list-of-test-routes .route-container {
-    width: 100%; } }
+    width: 100%;
+  }
+}
 
 /*# sourceMappingURL=style.css.map */
