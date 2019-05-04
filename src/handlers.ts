@@ -3,351 +3,355 @@ import { Protos } from "./pb-handlers";
 
 let protos: Protos = null;
 
-export function LookupUserHandler(res: Response) {
+export function GetEventHandler(req: Request, res: Response) {
+    console.log("GetEventHandler");
+    return "GetEventHandler";
+};
+export function LookupUserHandler(req: Request, res: Response) {
     console.log("LookupUserHandler");
     return "LookupUserHandler";
 };
-export function SearchUsersHandler(res: Response) {
+export function SearchUsersHandler(req: Request, res: Response) {
     console.log("SearchUsersHandler");
     return "SearchUsersHandler";
 };
-export function CreateUserHandler(res: Response) {
+export function CreateUserHandler(req: Request, res: Response) {
     console.log("CreateUserHandler");
     return "CreateUserHandler";
 };
-export function UpdateUserHandler(res: Response) {
+export function UpdateUserHandler(req: Request, res: Response) {
     console.log("UpdateUserHandler");
     return "UpdateUserHandler";
 };
-export function SetUserContactAddressHandler(res: Response) {
+export function SetUserContactAddressHandler(req: Request, res: Response) {
     console.log("SetUserContactAddressHandler");
     return "SetUserContactAddressHandler";
 };
-export function SetUserAccessHandler(res: Response) {
+export function SetUserAccessHandler(req: Request, res: Response) {
     console.log("SetUserAccessHandler");
     return "SetUserAccessHandler";
 };
-export function SetUserLoginStatusHandler(res: Response) {
+export function SetUserLoginStatusHandler(req: Request, res: Response) {
     console.log("SetUserLoginStatusHandler");
     return "SetUserLoginStatusHandler";
 };
-export function ResetUserPasswordHandler(res: Response) {
+export function ResetUserPasswordHandler(req: Request, res: Response) {
     console.log("ResetUserPasswordHandler");
     return "ResetUserPasswordHandler";
 };
-export function NukeHandleHandler(res: Response) {
+export function NukeHandleHandler(req: Request, res: Response) {
     console.log("NukeHandleHandler");
     return "NukeHandleHandler";
 };
-export function GetHandleHistoryHandler(res: Response) {
+export function GetHandleHistoryHandler(req: Request, res: Response) {
     console.log("GetHandleHistoryHandler");
     return "GetHandleHistoryHandler";
 };
-export function SendUserEmailNotificationHandler(res: Response) {
+export function SendUserEmailNotificationHandler(req: Request, res: Response) {
     console.log("SendUserEmailNotificationHandler");
     return "SendUserEmailNotificationHandler";
 };
-export function SearchAuditHistoryHandler(res: Response) {
+export function SearchAuditHistoryHandler(req: Request, res: Response) {
     console.log("SearchAuditHistoryHandler");
     return "SearchAuditHistoryHandler";
 };
-export function GetAppConfigHandler(res: Response) {
+export function GetAppConfigHandler(req: Request, res: Response) {
     console.log("GetAppConfigHandler");
     return "GetAppConfigHandler";
 };
-export function GetGlobalConfigHandler(res: Response) {
+export function GetGlobalConfigHandler(req: Request, res: Response) {
     console.log("GetGlobalConfigHandler");
     return "GetGlobalConfigHandler";
 };
-export function SetGlobalConfigHandler(res: Response) {
+export function SetGlobalConfigHandler(req: Request, res: Response) {
     console.log("SetGlobalConfigHandler");
     return "SetGlobalConfigHandler";
 };
-export function GetMatchQueueConfigHandler(res: Response) {
+export function GetMatchQueueConfigHandler(req: Request, res: Response) {
     console.log("GetMatchQueueConfigHandler");
     return "GetMatchQueueConfigHandler";
 };
-export function SetMatchQueueConfigHandler(res: Response) {
+export function SetMatchQueueConfigHandler(req: Request, res: Response) {
     console.log("SetMatchQueueConfigHandler");
     return "SetMatchQueueConfigHandler";
 };
-export function GetMatchUserConfigHandler(res: Response) {
+export function GetMatchUserConfigHandler(req: Request, res: Response) {
     console.log("GetMatchUserConfigHandler");
     return "GetMatchUserConfigHandler";
 };
-export function SetMatchUserConfigHandler(res: Response) {
+export function SetMatchUserConfigHandler(req: Request, res: Response) {
     console.log("SetMatchUserConfigHandler");
     return "SetMatchUserConfigHandler";
 };
-export function GetLobbyConfigHandler(res: Response) {
+export function GetLobbyConfigHandler(req: Request, res: Response) {
     console.log("GetLobbyConfigHandler");
     return "GetLobbyConfigHandler";
 };
-export function SetLobbyConfigHandler(res: Response) {
+export function SetLobbyConfigHandler(req: Request, res: Response) {
     console.log("SetLobbyConfigHandler");
     return "SetLobbyConfigHandler";
 };
-export function ListFeatureDefinitionsHandler(res: Response) {
+export function ListFeatureDefinitionsHandler(req: Request, res: Response) {
     console.log("ListFeatureDefinitionsHandler");
     return "ListFeatureDefinitionsHandler";
 };
-export function SetFeatureDefinitionHandler(res: Response) {
+export function SetFeatureDefinitionHandler(req: Request, res: Response) {
     console.log("SetFeatureDefinitionHandler");
     return "SetFeatureDefinitionHandler";
 };
-export function DeleteFeatureDefinitionHandler(res: Response) {
+export function DeleteFeatureDefinitionHandler(req: Request, res: Response) {
     console.log("DeleteFeatureDefinitionHandler");
     return "DeleteFeatureDefinitionHandler";
 };
-export function ListFeatureRulesHandler(res: Response) {
+export function ListFeatureRulesHandler(req: Request, res: Response) {
     console.log("ListFeatureRulesHandler");
     return "ListFeatureRulesHandler";
 };
-export function GetActiveFeaturesHandler(res: Response) {
+export function GetActiveFeaturesHandler(req: Request, res: Response) {
     console.log("GetActiveFeaturesHandler");
     return "GetActiveFeaturesHandler";
 };
-export function CreateFeatureRuleHandler(res: Response) {
+export function CreateFeatureRuleHandler(req: Request, res: Response) {
     console.log("CreateFeatureRuleHandler");
     return "CreateFeatureRuleHandler";
 };
-export function UpdateFeatureRuleHandler(res: Response) {
+export function UpdateFeatureRuleHandler(req: Request, res: Response) {
     console.log("UpdateFeatureRuleHandler");
     return "UpdateFeatureRuleHandler";
 };
-export function DeleteFeatureRuleHandler(res: Response) {
+export function DeleteFeatureRuleHandler(req: Request, res: Response) {
     console.log("DeleteFeatureRuleHandler");
     return "DeleteFeatureRuleHandler";
 };
-export function GetMatchQueueUsersHandler(res: Response) {
+export function GetMatchQueueUsersHandler(req: Request, res: Response) {
     console.log("GetMatchQueueUsersHandler");
     return "GetMatchQueueUsersHandler";
 };
-export function GetLobbiesHandler(res: Response) {
+export function GetLobbiesHandler(req: Request, res: Response) {
     console.log("GetLobbiesHandler");
     return "GetLobbiesHandler";
 };
-export function GetLobbyHandler(res: Response) {
+export function GetLobbyHandler(req: Request, res: Response) {
     console.log("GetLobbyHandler");
     return "GetLobbyHandler";
 };
-export function GetActiveMatchesHandler(res: Response) {
+export function GetActiveMatchesHandler(req: Request, res: Response) {
     console.log("GetActiveMatchesHandler");
     return "GetActiveMatchesHandler";
 };
-export function GetActiveMatchHandler(res: Response) {
+export function GetActiveMatchHandler(req: Request, res: Response) {
     console.log("GetActiveMatchHandler");
     return "GetActiveMatchHandler";
 };
-export function GetRecentMatchesHandler(res: Response) {
+export function GetRecentMatchesHandler(req: Request, res: Response) {
     console.log("GetRecentMatchesHandler");
     return "GetRecentMatchesHandler";
 };
-export function GetMatchDetailHandler(res: Response) {
+export function GetMatchDetailHandler(req: Request, res: Response) {
     console.log("GetMatchDetailHandler");
     return "GetMatchDetailHandler";
 };
-export function GetPlayerDetailHandler(res: Response) {
+export function GetPlayerDetailHandler(req: Request, res: Response) {
     console.log("GetPlayerDetailHandler");
     return "GetPlayerDetailHandler";
 };
-export function ListDesyncsHandler(res: Response) {
+export function ListDesyncsHandler(req: Request, res: Response) {
     console.log("ListDesyncsHandler");
     return "ListDesyncsHandler";
 };
-export function ListCrashesHandler(res: Response) {
+export function ListCrashesHandler(req: Request, res: Response) {
     console.log("ListCrashesHandler");
     return "ListCrashesHandler";
 };
-export function ListCrashBuildIdentifiersHandler(res: Response) {
+export function ListCrashBuildIdentifiersHandler(req: Request, res: Response) {
     console.log("ListCrashBuildIdentifiersHandler");
     return "ListCrashBuildIdentifiersHandler";
 };
-export function ListCrashCollectionsHandler(res: Response) {
+export function ListCrashCollectionsHandler(req: Request, res: Response) {
     console.log("ListCrashCollectionsHandler");
     return "ListCrashCollectionsHandler";
 };
-export function SearchPurchaseOrdersHandler(res: Response) {
+export function SearchPurchaseOrdersHandler(req: Request, res: Response) {
     console.log("SearchPurchaseOrdersHandler");
     return "SearchPurchaseOrdersHandler";
 };
-export function SyncPurchaseOrderHandler(res: Response) {
+export function SyncPurchaseOrderHandler(req: Request, res: Response) {
     console.log("SyncPurchaseOrderHandler");
     return "SyncPurchaseOrderHandler";
 };
-export function VoidPurchaseOrderHandler(res: Response) {
+export function VoidPurchaseOrderHandler(req: Request, res: Response) {
     console.log("VoidPurchaseOrderHandler");
     return "VoidPurchaseOrderHandler";
 };
-export function RefundPurchaseOrderHandler(res: Response) {
+export function RefundPurchaseOrderHandler(req: Request, res: Response) {
     console.log("RefundPurchaseOrderHandler");
     return "RefundPurchaseOrderHandler";
 };
-export function CountUsersHandler(res: Response) {
+export function CountUsersHandler(req: Request, res: Response) {
     console.log("CountUsersHandler");
     return "CountUsersHandler";
 };
-export function GetSessionsHandler(res: Response) {
+export function GetSessionsHandler(req: Request, res: Response) {
     console.log("GetSessionsHandler");
     return "GetSessionsHandler";
 };
-export function GetCharacterUsageHandler(res: Response) {
+export function GetCharacterUsageHandler(req: Request, res: Response) {
     console.log("GetCharacterUsageHandler");
     return "GetCharacterUsageHandler";
 };
-export function CheckHandleHandler(res: Response) {
+export function CheckHandleHandler(req: Request, res: Response) {
     console.log("CheckHandleHandler");
     return "CheckHandleHandler";
 };
-export function RegisterUserHandler(res: Response) {
+export function RegisterUserHandler(req: Request, res: Response) {
     console.log("RegisterUserHandler");
     return "RegisterUserHandler";
 };
-export function ValidateUserHandler(res: Response) {
+export function ValidateUserHandler(req: Request, res: Response) {
     console.log("ValidateUserHandler");
     return "ValidateUserHandler";
 };
-export function GetSecretQuestionHandler(res: Response) {
+export function GetSecretQuestionHandler(req: Request, res: Response) {
     console.log("GetSecretQuestionHandler");
     return "GetSecretQuestionHandler";
 };
-export function SendPasswordResetEmailHandler(res: Response) {
+export function SendPasswordResetEmailHandler(req: Request, res: Response) {
     console.log("SendPasswordResetEmailHandler");
     return "SendPasswordResetEmailHandler";
 };
-export function VerifyResetPasswordCodeHandler(res: Response) {
+export function VerifyResetPasswordCodeHandler(req: Request, res: Response) {
     console.log("VerifyResetPasswordCodeHandler");
     return "VerifyResetPasswordCodeHandler";
 };
-export function ResetPasswordHandler(res: Response) {
+export function ResetPasswordHandler(req: Request, res: Response) {
     console.log("ResetPasswordHandler");
     return "ResetPasswordHandler";
 };
-export function GetUserInfoHandler(res: Response) {
+export function GetUserInfoHandler(req: Request, res: Response) {
     console.log("GetUserInfoHandler");
     return "GetUserInfoHandler";
 };
-export function ResendValidationEmailHandler(res: Response) {
+export function ResendValidationEmailHandler(req: Request, res: Response) {
     console.log("ResendValidationEmailHandler");
     return "ResendValidationEmailHandler";
 };
-export function SetLocaleHandler(res: Response) {
+export function SetLocaleHandler(req: Request, res: Response) {
     console.log("SetLocaleHandler");
     return "SetLocaleHandler";
 };
-export function SetContactAddressHandler(res: Response) {
+export function SetContactAddressHandler(req: Request, res: Response) {
     console.log("SetContactAddressHandler");
     return "SetContactAddressHandler";
 };
-export function GetUserPrefsHandler(res: Response) {
+export function GetUserPrefsHandler(req: Request, res: Response) {
     console.log("GetUserPrefsHandler");
     return "GetUserPrefsHandler";
 };
-export function SetUserPrefsHandler(res: Response) {
+export function SetUserPrefsHandler(req: Request, res: Response) {
     console.log("SetUserPrefsHandler");
     return "SetUserPrefsHandler";
 };
-export function ChangePasswordHandler(res: Response) {
+export function ChangePasswordHandler(req: Request, res: Response) {
     console.log("ChangePasswordHandler");
     return "ChangePasswordHandler";
 };
-export function ChangeEmailAddressHandler(res: Response) {
+export function ChangeEmailAddressHandler(req: Request, res: Response) {
     console.log("ChangeEmailAddressHandler");
     return "ChangeEmailAddressHandler";
 };
-export function RedeemAccessCodeHandler(res: Response) {
+export function RedeemAccessCodeHandler(req: Request, res: Response) {
     console.log("RedeemAccessCodeHandler");
     return "RedeemAccessCodeHandler";
 };
-export function CrashReportHandler(res: Response) {
+export function CrashReportHandler(req: Request, res: Response) {
     console.log("CrashReportHandler");
     return "CrashReportHandler";
 };
-export function EventPingHandler(res: Response) {
+export function EventPingHandler(req: Request, res: Response) {
     console.log("EventPingHandler");
     return "EventPingHandler";
 };
-export function CreateLobbyHandler(res: Response) {
+export function CreateLobbyHandler(req: Request, res: Response) {
     console.log("CreateLobbyHandler");
     return "CreateLobbyHandler";
 };
-export function GetLobbyJoinCodeHandler(res: Response) {
+export function GetLobbyJoinCodeHandler(req: Request, res: Response) {
     console.log("GetLobbyJoinCodeHandler");
     return "GetLobbyJoinCodeHandler";
 };
-export function JoinLobbyByCodeHandler(res: Response) {
+export function JoinLobbyByCodeHandler(req: Request, res: Response) {
     console.log("JoinLobbyByCodeHandler");
     return "JoinLobbyByCodeHandler";
 };
-export function LeaveLobbyHandler(res: Response) {
+export function LeaveLobbyHandler(req: Request, res: Response) {
     console.log("LeaveLobbyHandler");
     return "LeaveLobbyHandler";
 };
-export function LobbySetReadyHandler(res: Response) {
+export function LobbySetReadyHandler(req: Request, res: Response) {
     console.log("LobbySetReadyHandler");
     return "LobbySetReadyHandler";
 };
-export function LobbySetOwnerHandler(res: Response) {
+export function LobbySetOwnerHandler(req: Request, res: Response) {
     console.log("LobbySetOwnerHandler");
     return "LobbySetOwnerHandler";
 };
-export function LobbySetGameOptionsHandler(res: Response) {
+export function LobbySetGameOptionsHandler(req: Request, res: Response) {
     console.log("LobbySetGameOptionsHandler");
     return "LobbySetGameOptionsHandler";
 };
-export function LobbyBanUserHandler(res: Response) {
+export function LobbyBanUserHandler(req: Request, res: Response) {
     console.log("LobbyBanUserHandler");
     return "LobbyBanUserHandler";
 };
-export function LobbyRemoveUserHandler(res: Response) {
+export function LobbyRemoveUserHandler(req: Request, res: Response) {
     console.log("LobbyRemoveUserHandler");
     return "LobbyRemoveUserHandler";
 };
-export function GetGameProfileHandler(res: Response) {
+export function GetGameProfileHandler(req: Request, res: Response) {
     console.log("GetGameProfileHandler");
     return "GetGameProfileHandler";
 };
-export function PingTestHandler(res: Response) {
+export function PingTestHandler(req: Request, res: Response) {
     console.log("PingTestHandler");
     return "PingTestHandler";
 };
-export function GetMatchHandler(res: Response) {
+export function GetMatchHandler(req: Request, res: Response) {
     console.log("GetMatchHandler");
     return "GetMatchHandler";
 };
-export function ResumeGetMatchHandler(res: Response) {
+export function ResumeGetMatchHandler(req: Request, res: Response) {
     console.log("ResumeGetMatchHandler");
     return "ResumeGetMatchHandler";
 };
-export function CancelGetMatchHandler(res: Response) {
+export function CancelGetMatchHandler(req: Request, res: Response) {
     console.log("CancelGetMatchHandler");
     return "CancelGetMatchHandler";
 };
-export function ResetGameHandler(res: Response) {
+export function ResetGameHandler(req: Request, res: Response) {
     console.log("ResetGameHandler");
     return "ResetGameHandler";
 };
-export function GetGameReplayRecordHandler(res: Response) {
+export function GetGameReplayRecordHandler(req: Request, res: Response) {
     console.log("GetGameReplayRecordHandler");
     return "GetGameReplayRecordHandler";
 };
-export function DesyncReportHandler(res: Response) {
+export function DesyncReportHandler(req: Request, res: Response) {
     console.log("DesyncReportHandler");
     return "DesyncReportHandler";
 };
-export function UpdatePlayerPreferencesHandler(res: Response) {
+export function UpdatePlayerPreferencesHandler(req: Request, res: Response) {
     console.log("UpdatePlayerPreferencesHandler");
     return "UpdatePlayerPreferencesHandler";
 };
-export function GetPlayerStatsHandler(res: Response) {
+export function GetPlayerStatsHandler(req: Request, res: Response) {
     console.log("GetPlayerStatsHandler");
     return "GetPlayerStatsHandler";
 };
-export function GetRecentGamesHandler(res: Response) {
+export function GetRecentGamesHandler(req: Request, res: Response) {
     console.log("GetRecentGamesHandler");
     return "GetRecentGamesHandler";
 };
-export function LoginHandler(res: Response) {
+export function LoginHandler(req: Request, res: Response) {
     res.json()
     .then(data => {
         console.log(data);
@@ -361,63 +365,63 @@ export function LoginHandler(res: Response) {
     console.log("LoginHandler");
     return "LoginHandler";
 };
-export function GetGameSessionTicketHandler(res: Response) {
+export function GetGameSessionTicketHandler(req: Request, res: Response) {
     console.log("GetGameSessionTicketHandler");
     return "GetGameSessionTicketHandler";
 };
-export function RedeemGameSessionTicketHandler(res: Response) {
+export function RedeemGameSessionTicketHandler(req: Request, res: Response) {
     console.log("RedeemGameSessionTicketHandler");
     return "RedeemGameSessionTicketHandler";
 };
-export function LogoutHandler(res: Response) {
+export function LogoutHandler(req: Request, res: Response) {
     console.log("LogoutHandler");
     return "LogoutHandler";
 };
-export function GetStoredPaymentMethodsHandler(res: Response) {
+export function GetStoredPaymentMethodsHandler(req: Request, res: Response) {
     console.log("GetStoredPaymentMethodsHandler");
     return "GetStoredPaymentMethodsHandler";
 };
-export function CreateStoredPaymentMethodHandler(res: Response) {
+export function CreateStoredPaymentMethodHandler(req: Request, res: Response) {
     console.log("CreateStoredPaymentMethodHandler");
     return "CreateStoredPaymentMethodHandler";
 };
-export function UpdateStoredPaymentMethodHandler(res: Response) {
+export function UpdateStoredPaymentMethodHandler(req: Request, res: Response) {
     console.log("UpdateStoredPaymentMethodHandler");
     return "UpdateStoredPaymentMethodHandler";
 };
-export function SetDefaultStoredPaymentMethodHandler(res: Response) {
+export function SetDefaultStoredPaymentMethodHandler(req: Request, res: Response) {
     console.log("SetDefaultStoredPaymentMethodHandler");
     return "SetDefaultStoredPaymentMethodHandler";
 };
-export function RemoveStoredPaymentMethodHandler(res: Response) {
+export function RemoveStoredPaymentMethodHandler(req: Request, res: Response) {
     console.log("RemoveStoredPaymentMethodHandler");
     return "RemoveStoredPaymentMethodHandler";
 };
-export function SubmitPurchaseOrderHandler(res: Response) {
+export function SubmitPurchaseOrderHandler(req: Request, res: Response) {
     console.log("SubmitPurchaseOrderHandler");
     return "SubmitPurchaseOrderHandler";
 };
-export function GetPurchaseOrderHandler(res: Response) {
+export function GetPurchaseOrderHandler(req: Request, res: Response) {
     console.log("GetPurchaseOrderHandler");
     return "GetPurchaseOrderHandler";
 };
-export function GetAccountOrderHistoryHandler(res: Response) {
+export function GetAccountOrderHistoryHandler(req: Request, res: Response) {
     console.log("GetAccountOrderHistoryHandler");
     return "GetAccountOrderHistoryHandler";
 };
-export function GetAccountBalanceHistoryHandler(res: Response) {
+export function GetAccountBalanceHistoryHandler(req: Request, res: Response) {
     console.log("GetAccountBalanceHistoryHandler");
     return "GetAccountBalanceHistoryHandler";
 };
-export function GetAccountBalanceHandler(res: Response) {
+export function GetAccountBalanceHandler(req: Request, res: Response) {
     console.log("GetAccountBalanceHandler");
     return "GetAccountBalanceHandler";
 };
-export function GetUserCountHandler(res: Response) {
+export function GetUserCountHandler(req: Request, res: Response) {
     console.log("GetUserCountHandler");
     return "GetUserCountHandler";
 };
-export function GetUsersInRankedCountHandler(res: Response) {
+export function GetUsersInRankedCountHandler(req: Request, res: Response) {
     console.log("GetUsersInRankedCountHandler");
     return "GetUsersInRankedCountHandler";
 };

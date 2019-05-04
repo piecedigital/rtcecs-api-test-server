@@ -7,7 +7,7 @@ interface Empty extends pb.Type {}
 interface Result extends pb.Type {
     result?: PBEnums["Status"], // optional Status = 1 [default = S_UNKNOWN];
     msg?: PBMessages["LocMsg"], // optional LocMsg = 4;
-    content?: any, // optional bytes = 10;
+    content?: number[], // optional bytes = 10;
     deprecated_msg_id?: string, // optional string = 2;
     deprecated_msg_params?: PBMessages["MsgParam"], // optional MsgParam = 3;
 }
@@ -19,7 +19,7 @@ interface GameEndpointConfig extends pb.Type {
     server?: PBMessages["NetworkAddr"], // optional NetworkAddr = 2;
     secret?: number, // optional fixed64 = 3;
     ping_score_threshold?: number, // optional float = 4;
-    shared_key?: any, // optional bytes = 5;
+    shared_key?: number[], // optional bytes = 5;
 }
 interface NetworkAddr extends pb.Type {
     host_name?: string, // optional string = 1;
@@ -150,7 +150,7 @@ interface CharacterStats extends pb.Type {
 }
 interface PlayerPreferences extends pb.Type {
     selected_char?: number, // optional string = 1;
-    local_player_prefs?: any, // optional bytes = 2;
+    local_player_prefs?: number[], // optional bytes = 2;
     char_prefs?: number, // optional CharacterSpec = 10;
 }
 interface ClientFeatureSet extends pb.Type {
@@ -165,7 +165,7 @@ interface FeatureValue extends pb.Type {
 interface MatchCreatedEvent extends pb.Type {
     game_config?: number, // optional GameConfig = 3;
     __deprecated_match_id?: number, // optional int64 = 1;
-    __deprecated_user_id?: number, // repeated int64 = 2;
+    __deprecated_user_id?: number[], // repeated int64 = 2;
 }
 interface Player extends pb.Type {}
 // Configuration for a single game in a match, suitable for sending
@@ -180,7 +180,7 @@ interface GameConfig extends pb.Type {
     }
 
     // Each player's character info.
-    player?: GameConfig["Player"], // repeated Player = 2;
+    player?: GameConfig["Player"][], // repeated Player = 2;
 
     // Global options for this game.
     options?: PBMessages["GameOptions"], // optional GameOptions = 5;
@@ -217,11 +217,11 @@ interface CharacterSpec extends pb.Type {
 }
 interface VariantSpec extends pb.Type {
     // 4-element array for variant ids for special 1, 2, 3 and super
-    specials?: number, // repeated int32 = 1;
+    specials?: number[], // repeated int32 = 1;
 }
 interface LocMsg extends pb.Type {
     id?: string, // optional string = 1;
-    param?: number, // repeated MsgParam = 2;
+    param?: number[], // repeated MsgParam = 2;
 }
 // Parameters to a message.  Using a message type
 // for each primitive works around protobuf-net's limitation
@@ -242,7 +242,7 @@ interface MsgParam extends pb.Type {
 }
 interface GameSessionRequest extends pb.Type {
     // Clients of the portal, should be exactly 2.
-    spec?: PBMessages["ClientSpec"], // repeated ClientSpec = 1;
+    spec?: PBMessages["ClientSpec"][], // repeated ClientSpec = 1;
 
     // Queue to publish input events.
     observer?: PBMessages["EventQueue"], // optional EventQueue = 2;
@@ -262,7 +262,7 @@ interface ClientSpec extends pb.Type {
     character?: PBMessages["CharacterSpec"], // optional CharacterSpec = 3;
 
     // The 128-bit shared key used to hash client packets
-    shared_key?: any, // optional bytes = 4;
+    shared_key?: number[], // optional bytes = 4;
 }
 interface FilterChangedEvent extends pb.Type {}
 interface WaitMatchProgressEvent extends pb.Type {
@@ -360,7 +360,7 @@ interface MatchExperience extends pb.Type {
 
 	// Experience thresholds for current player level (index 0),
 	// plus a few more in case the player levels up.
-	player_level_xp_min?: number, // repeated int32  = 12;
+	player_level_xp_min?: number[], // repeated int32  = 12;
 
 	// XP earned from the match.
 	player_match_xp?: number, // int32  = 21;
@@ -382,7 +382,7 @@ interface MatchExperience extends pb.Type {
 
 	// Experience thresholds for current character level (index 0),
 	// plus a few more in case the character levels up.
-	character_level_xp_min?: number, // repeated int32 = 34;
+	character_level_xp_min?: number[], // repeated int32 = 34;
 
 	// Ranking tier points awarded. Could be 0 or negative.
 	rank_points?: number, // int32 = 40;
@@ -424,7 +424,7 @@ interface GameBeginEvent extends pb.Type {
 }
 interface NextGameConfig extends pb.Type {
     // The new character specs to use for the next game.
-    character_spec?: PBMessages["CharacterSpec"], // repeated CharacterSpec = 1;
+    character_spec?: PBMessages["CharacterSpec"][], // repeated CharacterSpec = 1;
 
     // Proposed game options for the next game.
     // May only be specified during a training match.
@@ -440,7 +440,7 @@ interface GameInputEvent extends pb.Type {
     num_bits?: number, // int32 = 3;
 
     // Encoded frame inputs.
-    bits?: any, // bytes = 4;
+    bits?: number[], // bytes = 4;
 
     // True if this is the last set of inputs for a game.
     final?: boolean, // bool = 5;
@@ -481,15 +481,15 @@ interface LobbyLeaveEvent extends pb.Type {
 interface LobbyUpdateEvent extends pb.Type {
     lobby_id?: number, // int64 = 1;
 	// Members added or whose state changed.
-    update?: PBMessages["LobbyMember"], // repeated LobbyMember = 2;
+    update?: PBMessages["LobbyMember"][], // repeated LobbyMember = 2;
 	// Members who left.
-    removed?: number, // repeated int64 = 3;
+    removed?: number[], // repeated int64 = 3;
 	// Current state of the lobby.
     state?: PBEnums["LobbyState"], // LobbyState = 4;
 	// For state == LS_MATCH, GameConfig that started the running match.
     game_config?: PBMessages["GameConfig"], // GameConfig = 5;
 	// Order of queued members by account_id.
-    queue?: number, // repeated int64 = 6;
+    queue?: number[], // repeated int64 = 6;
 	// Options for games generated by this lobby.
     options?: PBMessages["GameOptions"], // GameOptions = 7;
 }
@@ -514,14 +514,14 @@ interface Lobby extends pb.Type {
     state?: PBEnums["LobbyState"], // LobbyState = 5;
     // People currently in the lobby.
     // Updated by LobbyMemberUpdateEvent.
-    member?: PBMessages["LobbyMember"], // repeated LobbyMember = 10;
+    member?: PBMessages["LobbyMember"][], // repeated LobbyMember = 10;
     // Options included for the next match generated by this lobby.
     options?: PBMessages["GameOptions"], // GameOptions = 11;
     // For state == LS_MATCH, start config of the game being played.
     game_config?: PBMessages["GameConfig"], // GameConfig = 20;
     // For type == LT_QUEUED, this is the current queue order of account IDs.
     // Updated by LobbyMemberUpdateEvent.
-    queue?: number, // repeated int64 = 30;
+    queue?: number[], // repeated int64 = 30;
 }
 interface LobbyMember extends pb.Type {
     account_id?: number, // int64 = 1;
@@ -616,7 +616,7 @@ interface UserPrefs extends pb.Type {
 }
 interface SearchUsersResult extends pb.Type {
     // Results do not include preferences or contact address.
-    users?: PBMessages["UserInfo"], // repeated tbmatch.UserInfo = 1;
+    users?: PBMessages["UserInfo"][], // repeated tbmatch.UserInfo = 1;
     end_of_data?: boolean, // optional bool = 2;
 }
 interface CreateUserResult extends pb.Type {
@@ -629,7 +629,7 @@ interface NukeHandleResult extends pb.Type {
 }
 interface GetHandleHistoryResult extends pb.Type {
     account_id?: number, // optional int64 = 1;
-    change?: PBMessages["HandleChange"], // repeated HandleChange = 2;
+    change?: PBMessages["HandleChange"][], // repeated HandleChange = 2;
 }
 interface HandleChange extends pb.Type {
     // Unix timestamp of the handle change time.
@@ -640,7 +640,7 @@ interface HandleChange extends pb.Type {
     new?: string, // optional string = 3;
 }
 interface SearchAuditHistoryResult extends pb.Type {
-    events?: PBMessages["AuditEvent"], // repeated AuditEvent = 1;
+    events?: PBMessages["AuditEvent"][], // repeated AuditEvent = 1;
     end_of_data?: boolean, // optional bool = 2;
 }
 interface AuditEvent extends pb.Type {
@@ -707,7 +707,7 @@ interface AccountConfig extends pb.Type {
     min_password_classes?: number, // optional int32 = 2[default = 2];
 
     // Access roles granted to publicly registered accounts.
-    register_access?: PBEnums["Access"], // repeated tbrpc.Access = 3;
+    register_access?: PBEnums["Access"][], // repeated tbrpc.Access = 3;
 
     // How long before e-mail validation links expire.
     email_validate_confirm_secs?: number, // optional int32 = 4[default = 7200];
@@ -744,7 +744,7 @@ interface AccountConfig extends pb.Type {
     require_registration_key?: boolean, // optional bool = 40[default = false];
 
     // Deny any handle that full-matches one of these expressions.
-    disallow_handle_regexp?: string, // repeated string = 41;
+    disallow_handle_regexp?: string[], // repeated string = 41;
 
     // Prefix to use when generating a handle to replace an offensive/disallowed one.
     nuke_handle_prefix?: string, // optional string = 42[default = "Donut"];
@@ -779,7 +779,7 @@ interface MatchServiceConfig extends pb.Type {
     // Glicko rating to assign to players with zero games played depending
     // on their SkillEstimateType. SkillEstimateType acts as the index into
     // the array.
-    default_glicko_rating?: number, // repeated float = 61;
+    default_glicko_rating?: number[], // repeated float = 61;
 
     // Max portion of rating difference to adjust for win/loss, scaled by deviation.
     session_rating_adjust_coefficient?: number, // optional float = 65[default = 0.25];
@@ -847,7 +847,7 @@ interface LevelProgression extends pb.Type {
 }
 interface EchelonConfig extends pb.Type {
     // Define all ranking echelons in progression order (0=Carbon .. N-1=Legend)
-    echelon?: PBMessages["EchelonRules"], // repeated EchelonRules = 1;
+    echelon?: PBMessages["EchelonRules"][], // repeated EchelonRules = 1;
 
     // Number of wins in a streak for bonus to apply.
     win_streak_bonus_minimum?: number, // optional int32 = 10[default = 3];
@@ -857,7 +857,7 @@ interface EchelonConfig extends pb.Type {
 }
 interface EchelonRules extends pb.Type {
     // Points required to advance for each tier in this echelon.
-    tier_points?: number, // repeated int32 = 1;
+    tier_points?: number[], // repeated int32 = 1;
 
     // If true, don't apply losses while in this echelon.
     ignore_loss?: boolean, // optional bool = 2[default = false];
@@ -910,7 +910,7 @@ interface PaymentConfig extends pb.Type {
     direct_response_delimiter: string, // optional string = 5[default = '|'];
 }
 interface CurrencyConfig extends pb.Type {
-    desc?: PBMessages["CurrencyDesc"], // repeated CurrencyDesc = 1;
+    desc?: PBMessages["CurrencyDesc"][], // repeated CurrencyDesc = 1;
 
     // Currency to use for new accounts when the country code
     // is unknown.
@@ -927,13 +927,13 @@ interface CurrencyDesc extends pb.Type {
     symbol?: string, // optional string = 3;
 
     // List of 3-letter country codes that use this currency.
-    country_iso3?: string, // repeated string = 4;
+    country_iso3?: string[], // repeated string = 4;
 
     // Allow balance loads with this currency.
     balance_purchase_allow?: boolean, // optional bool = 40;
 
     // Default values given for account balance purchases.
-    balance_purchase_default?: PBMessages["Money"], // repeated tbrpc.Money = 41;
+    balance_purchase_default?: PBMessages["Money"][], // repeated tbrpc.Money = 41;
 
     // Range of allowed custom balance purchase amounts.
     balance_purchase_min?: PBMessages["Money"], // optional tbrpc.Money = 42;
@@ -1127,7 +1127,7 @@ interface LobbyConfig extends pb.Type {
     active_match_timeout?: number, // optional int32 = 4[default = 7200];
 }
 interface ListFeatureDefinitionsResult extends pb.Type {
-    def?: PBMessages["FeatureDefinition"], // repeated FeatureDefinition = 1;
+    def?: PBMessages["FeatureDefinition"][], // repeated FeatureDefinition = 1;
 }
 interface FeatureDefinition extends pb.Type {
     // Unique tag identifying the feature.  Cannot be empty or contain spaces.
@@ -1137,7 +1137,7 @@ interface FeatureDefinition extends pb.Type {
     description?: string, // optional string = 2;
 }
 interface ListFeatureRulesResult extends pb.Type {
-    rule?: PBMessages["FeatureRule"], // repeated FeatureRule = 1;
+    rule?: PBMessages["FeatureRule"][], // repeated FeatureRule = 1;
 }
 interface FeatureRule extends pb.Type {
     // Server-generated unique ID of the rule.
@@ -1169,7 +1169,7 @@ interface GetActiveFeaturesResult extends pb.Type {
     feature_set?: PBMessages["ClientFeatureSet"], // optional tbmatch.ClientFeatureSet = 1;
 }
 interface GetMatchQueueUsersResult extends pb.Type {
-    user?: PBMessages["QueueUser"], // repeated QueueUser = 1;
+    user?: PBMessages["QueueUser"][], // repeated QueueUser = 1;
 }
 interface QueueUser extends pb.Type {
     account_id?: number, // optional int64 = 1;
@@ -1192,7 +1192,7 @@ interface QueueUser extends pb.Type {
     points?: number, // optional int32 = 32;
 }
 interface GetLobbiesResult extends pb.Type {
-    lobby?: PBMessages["LobbySummary"], // repeated LobbySummary = 1;
+    lobby?: PBMessages["LobbySummary"][], // repeated LobbySummary = 1;
 }
 interface LobbySummary extends pb.Type {
     lobby?: PBMessages["Lobby"], // optional tbmatch.Lobby = 1;
@@ -1210,7 +1210,7 @@ interface GetLobbyResult extends pb.Type {
     lobby?: PBMessages["LobbySummary"], // optional LobbySummary = 1;
 }
 interface GetActiveMatchesResult extends pb.Type {
-    match?: PBMessages["ActiveMatch"], // repeated ActiveMatch = 1;
+    match?: PBMessages["ActiveMatch"][], // repeated ActiveMatch = 1;
 }
 interface ActiveMatch extends pb.Type {
     match_id?: number, // optional int64 = 1;
@@ -1252,10 +1252,10 @@ interface GameDescriptor extends pb.Type {
     },
 
     // Extra details for each player slot.
-    player?: GameDescriptor["Player"], // repeated Player = 7;
+    player?: GameDescriptor["Player"][], // repeated Player = 7;
 
     // Portal session in use.
-    portal_uuid?: any, // optional bytes = 3;
+    portal_uuid?: number[], // optional bytes = 3;
 
     // For source == MATCH_MAKER, queue this match was generated by.
     // MT_LOBBY indicates a lobby match.
@@ -1267,14 +1267,14 @@ interface GameDescriptor extends pb.Type {
     // For source == LOBBY, lobby ID of the owning lobby.
     lobby_id?: number, // optional int64 = 9;
 
-    __deprecated_endpoint?: PBMessages["GameEndpointConfig"], // repeated GameEndpointConfig = 2;
-    __deprecated_remote_ip?: string, // repeated string = 6;
+    __deprecated_endpoint?: PBMessages["GameEndpointConfig"][], // repeated GameEndpointConfig = 2;
+    __deprecated_remote_ip?: string[], // repeated string = 6;
 }
 interface GetActiveMatchResult extends pb.Type {
     match?: PBMessages["ActiveMatch"], // optional ActiveMatch = 1;
 }
 interface GetRecentMatchesResult extends pb.Type {
-    match?: PBMessages["RecentMatch"], // repeated RecentMatch = 1;
+    match?: PBMessages["RecentMatch"][], // repeated RecentMatch = 1;
 }
 interface RecentMatch extends pb.Type {
     match_id?: number, // optional int64 = 1;
@@ -1292,7 +1292,7 @@ interface RecentMatch extends pb.Type {
         winner: 4, // optional bool
         disconnect: 5, // optional bool
     },
-    player?: RecentMatch["Player"], // repeated Player = 10;
+    player?: RecentMatch["Player"][], // repeated Player = 10;
 
     Game?: {
         game?: PBMessages["GameConfig"], // optional GameConfig = 1;
@@ -1300,7 +1300,7 @@ interface RecentMatch extends pb.Type {
         start_time_unix?: number, // optional int64 = 3;
         duration_sec?: number, // optional double = 4;
     },
-    game?: RecentMatch["Game"], // repeated Game = 20;
+    game?: RecentMatch["Game"][], // repeated Game = 20;
 }
 interface GetMatchDetailResult extends pb.Type {
     match?: PBMessages["RecentMatch"], // optional RecentMatch = 1;
@@ -1333,10 +1333,10 @@ interface MatchPlayer extends pb.Type {
 
         last_rating_time_unix?: number, // optional int64 = 10;
     },
-    rating?: MatchPlayer["Rating"], // repeated Rating = 20;
+    rating?: MatchPlayer["Rating"][], // repeated Rating = 20;
 }
 interface ListDesyncsResult extends pb.Type {
-    desync?: PBMessages["DesyncReportHeader"], // repeated tbmatch.DesyncReportHeader = 1;
+    desync?: PBMessages["DesyncReportHeader"][], // repeated tbmatch.DesyncReportHeader = 1;
 }
 interface DesyncReportHeader extends pb.Type {
     match_id?: number, // optional int64 = 1;
@@ -1348,7 +1348,7 @@ interface DesyncReportHeader extends pb.Type {
 }
 interface ListCrashesResult extends pb.Type {
 	collection?: PBMessages["CrashCollection"], // optional CrashCollection = 1;
-    reports?: PBMessages["CrashReportHeader"], // repeated CrashReportHeader = 2;
+    reports?: PBMessages["CrashReportHeader"][], // repeated CrashReportHeader = 2;
 }
 interface CrashCollection extends pb.Type {
     crash_identifier?: string, // optional string = 1;	// The top line of the stack trace, used as a unique identifier to group together the same types of crash.
@@ -1366,7 +1366,7 @@ interface CrashReportHeader extends pb.Type {
     crash_number?: string, // optional string = 6;		// The crash number on a per-build version basis
 }
 interface ListCrashBuildIdentifiersResult extends pb.Type {
-    identifiers?: PBMessages["CrashBuildIdentifier"], // repeated CrashBuildIdentifier = 1;
+    identifiers?: PBMessages["CrashBuildIdentifier"][], // repeated CrashBuildIdentifier = 1;
 }
 interface CrashBuildIdentifier extends pb.Type {
     build_identifier?: string, // optional string = 1;
@@ -1374,11 +1374,11 @@ interface CrashBuildIdentifier extends pb.Type {
     build_version?: string, // optional string = 3;
 }
 interface ListCrashCollectionsResult extends pb.Type {
-    collections?: PBMessages["CrashCollection"], // repeated CrashCollection = 1;
+    collections?: PBMessages["CrashCollection"][], // repeated CrashCollection = 1;
 }
 interface SearchPurchaseOrdersResult extends pb.Type  {
 	// Orders that matched the criteria.
-    orders?: PBMessages["PurchaseOrder"], // repeated tbmatch.PurchaseOrder = 1;
+    orders?: PBMessages["PurchaseOrder"][], // repeated tbmatch.PurchaseOrder = 1;
 
 	// True when the included results reached the end of the query result.
     end_of_data?: boolean, // optional bool = 2;
@@ -1396,7 +1396,7 @@ interface PurchaseOrder extends pb.Type {
     currency?: string, // optional string = 2;
 
     // List of items requested for purchase.  Minimum 1, max 30.
-    item?: PBMessages["PurchaseOrderItem"], // repeated PurchaseOrderItem = 3;
+    item?: PBMessages["PurchaseOrderItem"][], // repeated PurchaseOrderItem = 3;
     // Amount of tax and shipping included in the total.
     tax_amount?: PBMessages["Money"], // optional tbrpc.Money = 4;
     ship_amount?: PBMessages["Money"], // optional tbrpc.Money = 5;
@@ -1499,12 +1499,12 @@ interface UserCountStats extends pb.Type {
         role?: PBEnums["Access"], // optional tbrpc.Access = 1;
         count?: number, // optional int64 = 2;
     },
-    role ?: UserCountStats["RoleCount"], // repeated RoleCount = 3;
+    role ?: UserCountStats["RoleCount"][], // repeated RoleCount = 3;
 }
 interface GetSessionsResult extends pb.Type {
-	game?: PBMessages["Session"], // repeated Session = 1;
-	launcher?: PBMessages["Session"], // repeated Session = 2;
-	web?: PBMessages["Session"], // repeated Session = 3;
+	game?: PBMessages["Session"][], // repeated Session = 1;
+	launcher?: PBMessages["Session"][], // repeated Session = 2;
+	web?: PBMessages["Session"][], // repeated Session = 3;
 
 	// Total sessions active.
     total?: number, // optional int32 = 10;
@@ -1536,10 +1536,10 @@ interface CharacterUsageReport extends pb.Type {
     total_users?: number, // optional uint32 = 11;
 
     // Summary stats for each character.
-    char_usage?: PBMessages["CharacterUsage"], // repeated CharacterUsage = 13;
+    char_usage?: PBMessages["CharacterUsage"][], // repeated CharacterUsage = 13;
 
     // Half-matrix of win/loss ratios for each character combo & rating band.
-    win_ratio?: PBMessages["RatingWinRatioReport"], // repeated RatingWinRatioReport = 14;
+    win_ratio?: PBMessages["RatingWinRatioReport"][], // repeated RatingWinRatioReport = 14;
 }
 interface CharacterReportOptions extends pb.Type {
     start_time_unix?: number, // optional int64 = 1;			// Time of first match to include, 0 = all
@@ -1556,22 +1556,22 @@ interface CharacterReportOptions extends pb.Type {
     rating_bucket_size?: number, // optional int32 = 11[default = 150];	// Width of Glicko2 rating buckets.
 }
 interface CharacterUsage extends pb.Type {
-    type_name:? string, // optional string = 1;
-    total_matches:? number, // optional uint32 = 2;			// Number of match slots involved in.
-    unique_users:? number, // optional uint32 = 3;			// Number of unique users who played the character.
-    wins:? number, // optional uint32 = 4;
-    disconnects:? number, // optional uint32 = 5;
+    type_name?: string, // optional string = 1;
+    total_matches?: number, // optional uint32 = 2;			// Number of match slots involved in.
+    unique_users?: number, // optional uint32 = 3;			// Number of unique users who played the character.
+    wins?: number, // optional uint32 = 4;
+    disconnects?: number, // optional uint32 = 5;
 
     VariantUsage?: {
         specials?: string, // optional string = 1;
         count?: number, // optional uint32 = 2;
     },
-    variant_top_n?: CharacterUsage["VariantUsage"], // repeated VariantUsage = 6;
+    variant_top_n?: CharacterUsage["VariantUsage"][], // repeated VariantUsage = 6;
 }
 interface RatingWinRatioReport extends pb.Type {
     // Max Glicko2 rating for these matchups.
     rating_cap?: number, // optional int32 = 1;
-    matchup?: PBMessages["Matchup"], // repeated Matchup = 2;
+    matchup?: PBMessages["Matchup"][], // repeated Matchup = 2;
 }
 interface Matchup extends pb.Type {
     // Char type vs. opponent type.
@@ -1607,7 +1607,7 @@ interface GetPlayerStatsResult extends pb.Type {
     stats?: PBMessages["PlayerStats"], // optional PlayerStats = 1;
 }
 interface GetRecentGamesResult extends pb.Type {
-    game?: PBMessages["GameRecord"], // repeated GameRecord = 1;
+    game?: PBMessages["GameRecord"][], // repeated GameRecord = 1;
 }
 interface GameRecord extends pb.Type {
     match_id?: number, // optional int64 = 1;
@@ -1633,7 +1633,7 @@ interface GameRecord extends pb.Type {
 }
 interface GetStoredPaymentMethodsResult extends pb.Type {
 	// List of all stored payment methods.
-    method_list?: PBMessages["PaymentMethod"], // repeated PaymentMethod = 1;
+    method_list?: PBMessages["PaymentMethod"][], // repeated PaymentMethod = 1;
 
 	// Which method is set as the default.
     default_method_id?: number, // optional int64 = 2;
@@ -1646,7 +1646,7 @@ interface SubmitPurchaseOrderResult extends pb.Type {
 }
 interface GetAccountOrderHistoryResult extends pb.Type {
 	// Orders that matched the criteria.
-    orders?: PBMessages["PurchaseOrder"], // repeated PurchaseOrder = 1;
+    orders?: PBMessages["PurchaseOrder"][], // repeated PurchaseOrder = 1;
 
 	// True when the included results reached the end of the query result.
     end_of_data?: boolean, // optional bool = 2;
@@ -1656,7 +1656,7 @@ interface GetAccountBalanceHistoryResult extends pb.Type {
 	currency?: string, // optional string = 1;
 
 	// Summaries of orders that affected the balance.
-    entry?: PBMessages["BalanceEntry"], // repeated BalanceEntry = 2;
+    entry?: PBMessages["BalanceEntry"][], // repeated BalanceEntry = 2;
 
 	// True when the included results reached the end of the query result.
 	end_of_data?: boolean, // optional bool = 3;

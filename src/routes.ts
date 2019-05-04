@@ -27,6 +27,7 @@ export let listOfRoutes: RouteListItem[] = [];
 
 export function onProtosLoad() {
     listOfRoutes = [
+        new RouteListItem("/ryzthn/rpc/GetEvent", protos.messages.Empty.create({}), handlers.GetEventHandler),
         new RouteListItem("/ryzthn/rpc/LookupUser", protos.messages.UserInfo.create({}), handlers.LookupUserHandler),
         new RouteListItem("/ryzthn/rpc/SearchUsers", protos.messages.SearchUsersResult.create({}), handlers.SearchUsersHandler),
         new RouteListItem("/ryzthn/rpc/CreateUser", protos.messages.CreateUserResult.create({}), handlers.CreateUserHandler),
@@ -113,7 +114,7 @@ export function onProtosLoad() {
         new RouteListItem("/ryzthn/rpc/UpdatePlayerPreferences", protos.messages.Empty.create({}), handlers.UpdatePlayerPreferencesHandler),
         new RouteListItem("/ryzthn/rpc/GetPlayerStats", protos.messages.GetPlayerStatsResult.create({}), handlers.GetPlayerStatsHandler),
         new RouteListItem("/ryzthn/rpc/GetRecentGames", protos.messages.GetRecentGamesResult.create({}), handlers.GetRecentGamesHandler),
-        new RouteListItem("/ryzthn/rpc/Login", protos.messages.Empty.create({
+        new RouteListItem("/ryzthn/rpc/Login", protos.messages.LoginRequest.create({
             // Either handle or e-mail address can be used.
             login: "1",
             password: "2",
